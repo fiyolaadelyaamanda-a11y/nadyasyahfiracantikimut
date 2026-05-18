@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website Sekolah</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#ffd6e8,#ffc2d1,#ffb3c6);
+  overflow:hidden;
+}
+
+.bubble{
+  position:absolute;
+  bottom:-100px;
+  background:rgba(255,255,255,0.25);
+  border-radius:50%;
+  animation:float 12s infinite;
+}
+.bubble:nth-child(1){width:50px;height:50px;left:10%;}
+.bubble:nth-child(2){width:70px;height:70px;left:30%;}
+.bubble:nth-child(3){width:30px;height:30px;left:70%;}
+.bubble:nth-child(4){width:90px;height:90px;left:85%;}
+
+@keyframes float{
+  0%{transform:translateY(0);opacity:0;}
+  50%{opacity:1;}
+  100%{transform:translateY(-110vh);opacity:0;}
+}
+
+.login-box{
+  width:380px;
+  background:rgba(255,255,255,0.95);
+  padding:35px;
+  border-radius:25px;
+  box-shadow:0 15px 35px rgba(0,0,0,0.2);
+  text-align:center;
+}
+
+.icon{
+  font-size:60px;
+  margin-bottom:10px;
+}
+
+h1{
+  color:#d46a92;
+  margin-bottom:8px;
+}
+
+p{
+  color:#666;
+  margin-bottom:15px;
+}
+
+input,select{
+  width:100%;
+  padding:12px;
+  margin:10px 0;
+  border:2px solid #ffc2d1;
+  border-radius:12px;
+}
+
+button{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:12px;
+  background:linear-gradient(90deg,#f8a5c2,#f78fb3);
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+}
+
+#message{
+  margin-top:10px;
+  font-weight:bold;
+}
+
+.home{
+  display:none;
+  text-align:center;
+  color:white;
+}
+
+.home h2{
+  font-size:45px;
+  margin-bottom:15px;
+}
+
+.home p{
+  color:white;
+}
+
+.menu{
+  margin-top:25px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+.card{
+  background:rgba(255,255,255,0.2);
+  padding:20px;
+  border-radius:18px;
+  cursor:pointer;
+}
+
+.card:hover{
+  background:rgba(255,182,193,0.4);
+}
+
+#contentPage{
+  display:none;
+  margin-top:25px;
+  background:rgba(255,255,255,0.2);
+  padding:20px;
+  border-radius:18px;
+  color:white;
+}
+</style>
+</head>
+<body>
+
+<div class="bubble"></div>
+<div class="bubble"></div>
+<div class="bubble"></div>
+<div class="bubble"></div>
+
+<div class="login-box" id="loginPage">
+  <div class="icon">🎀🏫</div>
+  <h1>Website Sekolah</h1>
+  <p>Login Admin / User</p>
+
+  <select id="role">
+    <option value="admin">Admin</option>
+    <option value="user">User</option>
+  </select>
+
+  <input type="text" id="username" placeholder="Masukkan Username">
+  <input type="password" id="password" placeholder="Masukkan Password">
+
+  <button onclick="login()">Login</button>
+  <p id="message"></p>
+</div>
+
+<div class="home" id="homePage">
+  <h2>✨ Selamat Datang ✨</h2>
+  <p>Portal Digital Sekolah Modern</p>
+
+  <div class="menu">
+    <div class="card" onclick="showPage('profil')">📚 Profil Sekolah</div>
+    <div class="card" onclick="showPage('jadwal')">🗓 Jadwal Pelajaran</div>
+    <div class="card" onclick="showPage('pengumuman')">📢 Pengumuman</div>
+  </div>
+
+  <div id="contentPage"></div>
+</div>
+
+<script>
+function login(){
+  let role = document.getElementById("role").value;
+  let username = document.getElementById("username").value;
+  let password = document.getElementById("password").value;
+  let message = document.getElementById("message");
+
+  if(role==="admin" && username==="admin" && password==="nadya123"){
+    document.getElementById("loginPage").style.display="none";
+    document.getElementById("homePage").style.display="block";
+  }
+  else if(role==="user" && username==="user" && password==="nanad123"){
+    document.getElementById("loginPage").style.display="none";
+    document.getElementById("homePage").style.display="block";
+  }
+  else{
+    message.innerHTML="Username atau Password salah!";
+    message.style.color="red";
+  }
+}
+
+function showPage(page){
+  let content = document.getElementById("contentPage");
+  content.style.display = "block";
+
+  if(page==="profil"){
+    content.innerHTML="<h3>📚 Profil Sekolah</h3><p>Sekolah berdiri sejak 2005 dan berfokus pada pendidikan berkualitas.</p>";
+  }
+  else if(page==="jadwal"){
+    content.innerHTML="<h3>🗓 Jadwal Sekolah</h3><p>Senin - Jumat, 07:00 - 14:00 WIB</p>";
+  }
+  else if(page==="pengumuman"){
+    content.innerHTML="<h3>📢 Pengumuman</h3><p>Ujian semester dimulai tanggal 10 Juni.</p>";
+  }
+}
+</script>
+
+</body>
+</html>
